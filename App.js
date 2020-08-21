@@ -80,6 +80,6 @@ const styles = StyleSheet.create({
   text: {
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: "50%",
+    paddingTop: "60%",
   },
 });

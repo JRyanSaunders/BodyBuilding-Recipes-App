@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Button,
 } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../firebase/config";
@@ -61,6 +62,9 @@ export default function HomeScreen(props) {
     return (
       <View style={styles.entityContainer}>
         <Text style={styles.entityText}>
+          <TouchableOpacity style={styles.deleteButton}>
+            <Text style={styles.deleteButtonText}>X</Text>
+          </TouchableOpacity>
           {index}. {item.text}
         </Text>
       </View>
@@ -69,6 +73,11 @@ export default function HomeScreen(props) {
 
   return (
     <View style={styles.container}>
+      <Button
+        title="Sign Out"
+        color="red"
+        onPress={() => firebase.auth().signOut()}
+      />
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
