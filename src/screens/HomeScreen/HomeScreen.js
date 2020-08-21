@@ -58,11 +58,26 @@ export default function HomeScreen(props) {
     }
   };
 
+  const onDeleteButtonPress = () => {
+    if (entityText && entityText.length != null) {
+      const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+      const data = {
+        text: entityText,
+        authorID: userID,
+        createdAt: timestamp,
+      };
+      entityRef.doc("3cljHO2k5PV3YOsHHK58nXcJOkb2").delete();
+    }
+  };
+
   const renderEntity = ({ item, index }) => {
     return (
       <View style={styles.entityContainer}>
         <Text style={styles.entityText}>
-          <TouchableOpacity style={styles.deleteButton}>
+          <TouchableOpacity
+            onPress={onDeleteButtonPress}
+            style={styles.deleteButton}
+          >
             <Text style={styles.deleteButtonText}>X</Text>
           </TouchableOpacity>
           {index}. {item.text}

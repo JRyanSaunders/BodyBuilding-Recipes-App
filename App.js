@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { firebase } from "./src/firebase/config";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -42,6 +42,7 @@ export default function App() {
           });
       } else {
         setLoading(false);
+        setUser(null);
       }
     });
   }, []);
