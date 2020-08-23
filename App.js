@@ -1,11 +1,12 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { firebase } from "./src/firebase/config";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen, HomeScreen, RegistrationScreen } from "./src/screens";
 import { decode, encode } from "base-64";
+
 if (!global.btoa) {
   global.btoa = encode;
 }
@@ -13,7 +14,7 @@ if (!global.atob) {
   global.atob = decode;
 }
 
-/* The global stuff above a version of the firebase package newer than 7.9.0.  
+/* The if global statement above is used when a version of the firebase package newer than 7.9.0.  
 It's sort of a "bug" that they don't seem to intend to fix. 
 When you are installing packages, instead of doing npm install ***, 
 do expo install ***, that will grab the version of the package that 
@@ -54,6 +55,8 @@ export default function App() {
       </View>
     );
   }
+
+  // load time is the total amount of time it takes to check whether the user has logged in, in the userEffect
 
   return (
     <NavigationContainer>

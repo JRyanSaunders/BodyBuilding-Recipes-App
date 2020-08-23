@@ -69,7 +69,7 @@ export default function HomeScreen(props) {
           color="red"
           onPress={() =>
             entityRef
-              .doc(entity.id)
+              .doc(item.id)
               .delete()
               .catch((error) => {
                 alert(error);
