@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { color } from "react-native-reanimated";
 
 export default StyleSheet.create({
   container: {
@@ -52,17 +53,25 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   listContainer: {
-    marginTop: 20,
     padding: 20,
+    marginBottom: 20,
   },
   entityContainer: {
     marginTop: 16,
     borderBottomColor: "#cccccc",
     borderBottomWidth: 1,
-    paddingBottom: 16,
+    backgroundColor: "#FFFFFF",
+    flexDirection: "row",
+    borderRadius: 20,
+    paddingVertical: 20,
+    paddingRight: 100,
+    paddingLeft: 70,
   },
   entityText: {
     fontSize: 20,
     color: "#333333",
+    paddingRight: 70,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

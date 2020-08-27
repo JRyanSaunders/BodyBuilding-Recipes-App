@@ -24,11 +24,13 @@ export default function HomeScreen(props) {
       .orderBy("createdAt", "desc")
       .onSnapshot(
         (querySnapshot) => {
-          const newEntities = [];
+          // Query snapshot is an array of objects when I call .onSnapshot. Huge object containing 99% stuff I wont use
+          const newEntities = []; // Create a new array to store the data im trying to get
           querySnapshot.forEach((doc) => {
-            const entity = doc.data();
-            entity.id = doc.id;
-            newEntities.push(entity);
+            //loops through the array, doc is what returns each time it loops
+            const entity = doc.data(); // .data() is the ACTUAL data im requesting i.e to a user object
+            entity.id = doc.id; // doc id provides the uid for that particular document
+            newEntities.push(entity); // pushes entity object to entities array.
           });
           setEntities(newEntities);
         },
@@ -59,6 +61,7 @@ export default function HomeScreen(props) {
   };
 
   const renderEntity = ({ item, index }) => {
+    // Dont pass the values into it, it sends it as an object. Seperates properties for use. Data comes from renderItem in flatlist
     return (
       <View style={styles.entityContainer}>
         <Text style={styles.entityText}>
@@ -83,6 +86,8 @@ export default function HomeScreen(props) {
 
   return (
     <View style={styles.container}>
+      <Text>Shopping List:</Text>
+      <Text>Make a note of the items you need at the store!</Text>
       <Button
         title="Sign Out"
         color="red"

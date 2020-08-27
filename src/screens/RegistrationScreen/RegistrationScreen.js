@@ -31,6 +31,7 @@ export default function RegistrationScreen({ navigation }) {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
+        //the response is from the .create... above and is called a promise
         const uid = response.user.uid;
         const data = {
           id: uid,
@@ -42,7 +43,7 @@ export default function RegistrationScreen({ navigation }) {
           .doc(uid)
           .set(data)
           .then(() => {
-            navigation.navigate("Home", { user: data });
+            navigation.navigate("Home", { user: data }); // takes in two parameters: screen to navigate to and then the data to pass in.
           })
           .catch((error) => {
             alert(error);

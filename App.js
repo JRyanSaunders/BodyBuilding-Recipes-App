@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { firebase } from "./src/firebase/config";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LoginScreen, HomeScreen, RegistrationScreen } from "./src/screens";
 import { decode, encode } from "base-64";
 
@@ -27,8 +28,10 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // is run everytime the screen renders combination of lifecycle methods
     const usersRef = firebase.firestore().collection("users");
     firebase.auth().onAuthStateChanged((user) => {
+      //auth listener because code needs to be run as  soon as its loaded
       if (user) {
         usersRef
           .doc(user.uid)
@@ -46,7 +49,7 @@ export default function App() {
         setUser(null);
       }
     });
-  }, []);
+  }, []); // empty second param is to give it a state variable that you want to run the code, whenever the state is updated. Wth it being empty, the array will only be run once.
 
   if (loading) {
     return (
@@ -54,9 +57,7 @@ export default function App() {
         <Text style={styles.text}>Loading...</Text>
       </View>
     );
-  }
-
-  // load time is the total amount of time it takes to check whether the user has logged in, in the userEffect
+  } // load time is the total amount of time it takes to check whether the user has logged in, in the userEffect
 
   return (
     <NavigationContainer>
@@ -64,7 +65,7 @@ export default function App() {
         {user ? (
           <Stack.Screen name="Home">
             {(props) => <HomeScreen {...props} extraData={user} />}
-          </Stack.Screen>
+          </Stack.Screen> // props takes in anything that the navigator is also using, like navigation
         ) : (
           <>
             <Stack.Screen name="Login" component={LoginScreen} />
