@@ -64,10 +64,10 @@ export default function App() {
       <Stack.Navigator>
         {user ? (
           <>
+            <Stack.Screen name="Tabs" component={Tabs} />
             <Stack.Screen name="Home">
               {(props) => <HomeScreen {...props} extraData={user} />}
             </Stack.Screen>
-            <Stack.Screen name="Tabs" component={Tabs} />
           </> // props takes in anything that the navigator is also using, like navigation
         ) : (
           <>
@@ -86,22 +86,22 @@ const Tabs = () => {
   return (
     <MainTabs.Navigator>
       <MainTabs.Screen
-        name="Tab1"
+        name="Home"
         initialParams={{ title: "Tab Screen 1" }}
         component={HomeScreen}
       />
       <MainTabs.Screen
-        name="Tab2"
+        name="ShoppingList"
         initialParams={{ title: "Tab Screen 2" }}
         component={HomeScreen}
       />
       <MainTabs.Screen
-        name="Tab3"
+        name="unknown"
         initialParams={{ title: "Tab Screen 3" }}
         component={HomeScreen}
       />
       <MainTabs.Screen
-        name="Tab4"
+        name="Favourites"
         initialParams={{ title: "Tab Screen 4" }}
         component={HomeScreen}
       />

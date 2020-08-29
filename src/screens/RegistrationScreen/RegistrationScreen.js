@@ -42,9 +42,6 @@ export default function RegistrationScreen({ navigation }) {
         usersRef
           .doc(uid)
           .set(data)
-          .then(() => {
-            navigation.navigate("Home", { user: data }); // takes in two parameters: screen to navigate to and then the data to pass in.
-          })
           .catch((error) => {
             alert(error);
           });

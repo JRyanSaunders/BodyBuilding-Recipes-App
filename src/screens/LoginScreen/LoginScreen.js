@@ -21,7 +21,6 @@ export default function LoginScreen({ navigation }) {
 
   const onLoginPress = () => {
     firebase.auth().signInWithEmailAndPassword(email, password);
-    navigation.navigate("Tabs");
   };
 
   return (
