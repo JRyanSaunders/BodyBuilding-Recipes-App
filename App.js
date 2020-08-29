@@ -63,9 +63,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         {user ? (
-          <Stack.Screen name="Home">
-            {(props) => <HomeScreen {...props} extraData={user} />}
-          </Stack.Screen> // props takes in anything that the navigator is also using, like navigation
+          <>
+            <Stack.Screen name="Home">
+              {(props) => <HomeScreen {...props} extraData={user} />}
+            </Stack.Screen>
+            <Stack.Screen name="Tabs" component={Tabs} />
+          </> // props takes in anything that the navigator is also using, like navigation
         ) : (
           <>
             <Stack.Screen name="Login" component={LoginScreen} />
@@ -76,6 +79,35 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const MainTabs = createBottomTabNavigator();
+
+const Tabs = () => {
+  return (
+    <MainTabs.Navigator>
+      <MainTabs.Screen
+        name="Tab1"
+        initialParams={{ title: "Tab Screen 1" }}
+        component={HomeScreen}
+      />
+      <MainTabs.Screen
+        name="Tab2"
+        initialParams={{ title: "Tab Screen 2" }}
+        component={HomeScreen}
+      />
+      <MainTabs.Screen
+        name="Tab3"
+        initialParams={{ title: "Tab Screen 3" }}
+        component={HomeScreen}
+      />
+      <MainTabs.Screen
+        name="Tab4"
+        initialParams={{ title: "Tab Screen 4" }}
+        component={HomeScreen}
+      />
+    </MainTabs.Navigator>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
