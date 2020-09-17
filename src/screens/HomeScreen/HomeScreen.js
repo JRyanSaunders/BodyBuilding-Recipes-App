@@ -10,13 +10,14 @@ import {
 } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../firebase/config";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-export default function HomeScreen(props) {
+export default function HomeScreen({ navigation, route }) {
   const [entityText, setEntityText] = useState("");
   const [entities, setEntities] = useState([]);
 
   const entityRef = firebase.firestore().collection("entities");
-  const userID = props.extraData.id;
+  const userID = route.params.user.id;
 
   useEffect(() => {
     entityRef
@@ -85,38 +86,44 @@ export default function HomeScreen(props) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Shopping List:</Text>
-      <Text>Make a note of the items you need at the store!</Text>
-      <Button
-        title="Sign Out"
-        color="red"
-        onPress={() => firebase.auth().signOut()}
-      />
-      <View style={styles.formContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Add new entity"
-          placeholderTextColor="#aaaaaa"
-          onChangeText={(text) => setEntityText(text)}
-          value={entityText}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={styles.container}>
+        <Text>Shopping List:</Text>
+        <Text>Make a note of the items you need at the store!</Text>
+        <Button
+          title="Sign Out"
+          color="red"
+          onPress={() => firebase.auth().signOut()}
         />
-        <TouchableOpacity style={styles.button} onPress={onAddButtonPress}>
-          <Text style={styles.buttonText}>Add</Text>
-        </TouchableOpacity>
-      </View>
-      {entities && (
-        <View style={styles.listContainer}>
-          <FlatList
-            data={entities}
-            renderItem={renderEntity}
-            keyExtractor={(item) => item.id}
-            removeClippedSubviews={true}
+        <View style={styles.formContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Add new entity"
+            placeholderTextColor="#aaaaaa"
+            onChangeText={(text) => setEntityText(text)}
+            value={entityText}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
           />
+          <TouchableOpacity style={styles.button} onPress={onAddButtonPress}>
+            <Text style={styles.buttonText}>Add</Text>
+          </TouchableOpacity>
         </View>
-      )}
-    </View>
+        {entities && (
+          <View style={styles.listContainer}>
+            <FlatList
+              data={entities}
+              renderItem={renderEntity}
+              keyExtractor={(item) => item.id}
+              removeClippedSubviews={true}
+            />
+          </View>
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 }

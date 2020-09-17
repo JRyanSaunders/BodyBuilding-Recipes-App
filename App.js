@@ -64,7 +64,11 @@ export default function App() {
       <Stack.Navigator>
         {user ? (
           <>
-            <Stack.Screen name="Tabs" component={Tabs} />
+            <Stack.Screen
+              name="Tabs"
+              component={Tabs}
+              initialParams={{ user }}
+            />
             <Stack.Screen name="Home">
               {(props) => <HomeScreen {...props} extraData={user} />}
             </Stack.Screen>
